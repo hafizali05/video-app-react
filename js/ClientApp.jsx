@@ -3,34 +3,19 @@ import { render } from 'react-dom';
 
 const ce = React.createElement;
 
-const MyTitle = (props) => (
-    ce('div', null,
-        ce('h4', {
-            id: props.id,
-            style: { color: props.color }
-        },
-            props.title
-        )
-    )
-)
-const MyFirstComponent = () => (
-    ce('div', null,
-        [
-            ce('h1', { id: "hello-world-ccomponent" }, "hello world"),
-            ce(MyTitle, { title: 'testing-title', id: 'title-component', color: 'red' }),
-            ce(MyTitle, { title: 'testing-green', id: 'title-green', color: 'green' }),
-            ce(MyTitle, { title: 'testing-YellowGreen', id: 'title-YellowGreen', color: 'YellowGreen' }),
-            ce(MyTitle, { title: 'testing-GreenYellow', id: 'title-GreenYellow', color: 'GreenYellow' }),
-            ce(MyTitle, { title: 'testing-title', id: 'title-component', color: 'red' }),
-            ce(MyTitle, { title: 'testing-title', id: 'title-component', color: 'red' }),
-            ce(MyTitle, { title: 'testing-title', id: 'title-component', color: 'red' }),
-            ce(MyTitle, { title: 'testing-title', id: 'title-component', color: 'red' }),
-            ce(MyTitle, { title: 'testing-title', id: 'title-component', color: 'red' }),
-        ]
-    )
-)
+const MyTitle = function(props) {
+  return ce('div', null, ce('h1', { style: { color: props.color } }, props.title));
+};
 
-render(
-    ce(MyFirstComponent),
-    document.getElementById('app')
-)
+const MyFirstComponent = function() {
+  return ce(
+    'div',
+    { id: 'my-first-component' },
+    ce(MyTitle, { title: 'Game of Thrones', color: 'YellowGreen' }),
+    ce(MyTitle, { title: 'Stranger Things', color: 'GreenYellow' }),
+    ce(MyTitle, { title: 'Rick and Morty', color: 'LimeGreen' }),
+    ce(MyTitle, { title: 'House of Cards', color: 'peru' })
+  );
+};
+
+render(ce(MyFirstComponent), document.getElementById('app'));
