@@ -1,6 +1,11 @@
 const path = require('path');
 
 module.exports = {
+  devServer: {
+    // hot: true,
+    publicPath: '/public/',
+    historyApiFallback: true
+  },
   context: __dirname,
   entry: './js/ClientApp.jsx',
   devtool: 'cheap-eval-source-map',
