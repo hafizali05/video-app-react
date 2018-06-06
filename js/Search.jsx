@@ -11,11 +11,11 @@ class Search extends Component {
   //   };
   // }
   state = {
-    searchTerm: ''
-  }
-  handleSearchChange = event =>{
-    this.setState({searchTerm:event.target.value});
-  }
+    searchTerm: ""
+  };
+  handleSearchChange = event => {
+    this.setState({ searchTerm: event.target.value });
+  };
   render() {
     return (
       <div className="search">
@@ -28,7 +28,17 @@ class Search extends Component {
             placeholder="find video"
           />
         </header>
-        {preload.shows.map(show => <ShowCard {...show} key={show.imdbID} />)}
+        <div>
+          {preload.shows
+            .filter(
+              show =>
+                `${show.title} ${show.description}`
+                  .toUpperCase()
+                  .indexOf(this.state.searchTerm.toUpperCase()) >= 0
+            )
+            // .filter(show => `${`${show.title}``${show.description}`}`.toUpperCase().indexOf(this.state.searchTerm) >= 0)
+            .map(show => <ShowCard {...show} key={show.imdbID} />)}
+        </div>
 
       </div>
     );
